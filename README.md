@@ -1,2 +1,2 @@
 # rabbitmq-python
-Repositorio para intalar y probar mensajeria asincrona con RabbitMQ en Python 
+Repositorio para probar mensajeria asincrona utilizando RabbitMQ y Python 
