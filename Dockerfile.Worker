@@ -1,0 +1,18 @@
+FROM python:3.9-slim
+
+# Crea el usuario appuser para crontab
+RUN useradd -m -s /bin/bash appuser
+
+# Cambiar al usuario 'appuser'
+USER appuser
+
+# Copiar script de la aplicación y archivos necesarios
+WORKDIR /home/appuser/app
+
+COPY worker.py worker.py
+
+# Instalar las dependencias de la aplicación como el usuario 'appuser'
+RUN python -m pip install pika --upgrade
+
+# Iniciar la aplicación
+CMD ["python", "worker.py"]

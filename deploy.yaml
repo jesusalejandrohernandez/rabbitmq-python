@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: send-rabbitmq
+spec:
+  schedule: "*/5 * * * *"
+  timeZone: "America/Mexico_City"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: send-app
+              image: alejandrohm/sender-rabbitmq:1.0.0 
+          restartPolicy: OnFailure
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-rabbitmq
+  template:
+    metadata:
+      labels:
+        app: worker-rabbitmq
+    spec:
+      containers:
+      - name: worker-app
+        image: alejandrohm/worker-rabbitmq:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
