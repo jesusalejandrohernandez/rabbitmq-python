@@ -70,7 +70,7 @@ hello-word          4m1s
 ## View RabbitMQ Logs
 
 ```bash
-kubectl logs mide-server-0
+kubectl logs hello-word-server-0
 ...
 
   ##  ##      RabbitMQ 3.12.1
@@ -98,8 +98,8 @@ kubectl logs mide-server-0
 ```bash
 ...
 decode base64
-kubectl get secrets mide-default-user -o jsonpath='{.data.username}'
-kubectl get secrets mide-default-user -o jsonpath='{.data.password}'
+kubectl get secrets hello-word-default-user -o jsonpath='{.data.username}'
+kubectl get secrets hello-word-default-user -o jsonpath='{.data.password}'
 ...
 
 kubectl port-forward "service/hello-word" 15672
@@ -171,7 +171,7 @@ logging.info('Sleep 3s')
 time.sleep(3)
 logging.info('Config credentials to RabbitMQ')
 credentials = pika.PlainCredentials('default_user_HyVrwYiHL_OO94aaM_X', 'nV0c9NekNaRY7SJ8R-q4Qr3rntx1FBW2')
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='mide.default.svc.cluster.local', credentials=credentials))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='hello-word.default.svc.cluster.local', credentials=credentials))
 channel = connection.channel()
 
 channel.queue_declare(queue='task_queue', durable=True)
@@ -204,7 +204,7 @@ logging.basicConfig(
 logging.info('Init Worker')
 logging.info('Config credentials to RabbitMQ')
 credentials = pika.PlainCredentials('default_user_HyVrwYiHL_OO94aaM_X', 'nV0c9NekNaRY7SJ8R-q4Qr3rntx1FBW2')
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='mide.default.svc.cluster.local', credentials=credentials))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='hello-word.default.svc.cluster.local', credentials=credentials))
 channel = connection.channel()
 
 logging.info('Queue declare')
