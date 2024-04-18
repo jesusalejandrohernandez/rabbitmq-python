@@ -98,8 +98,8 @@ kubectl logs mide-server-0
 ```bash
 ...
 decode base64
-kubectl get secrets hello-word-default-user -o jsonpath='{.data.username}'
-kubectl get secrets hello-word-default-user -o jsonpath='{.data.password}'
+kubectl get secrets mide-default-user -o jsonpath='{.data.username}'
+kubectl get secrets mide-default-user -o jsonpath='{.data.password}'
 ...
 
 kubectl port-forward "service/hello-word" 15672
