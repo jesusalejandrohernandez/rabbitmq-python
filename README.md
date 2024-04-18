@@ -70,7 +70,7 @@ hello-word          4m1s
 ## View RabbitMQ Logs
 
 ```bash
-kubectl logs hello-word-server-0
+kubectl logs mide-server-0
 ...
 
   ##  ##      RabbitMQ 3.12.1
